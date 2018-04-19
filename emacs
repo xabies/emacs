@@ -8,22 +8,28 @@
 (package-initialize) ;; You might already have this line
 
 ;; Load theme Theme
-(load-theme 'cyberpunk t)
-;;(load-theme 'solarized-dark t)
+(load-theme 'darkokai t)
 
+;; Replace selection
+(delete-selection-mode 1)
 
 ;; Dashboard
 (require 'dashboard)
 (dashboard-setup-startup-hook)
+(setq dashboard-items '(
+			(projects . 5)
+			(bookmarks . 5)
+			(recents  . 5)
+                        ))
 
-(setq dashboard-items '((projects  . 5)
-                        (bookmarks . 5)
-			(recents , 5)))
 
 ;; Neotre F8 key
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
+
+;; Flyspell
+(global-set-key [f6] 'flyspell-prog-mode)
 
 ;; make buffer switch command auto suggestions, also for find-file command
 ;;(ido-mode 1)
@@ -56,6 +62,16 @@
 
 ;; Git Gutter
 (global-git-gutter+-mode)
+
+
+;; Org mode
+(require 'org)
+(define-key global-map "\C-cl" 'org-store-link)
+(define-key global-map "\C-ca" 'org-agenda-list)
+(setq org-agenda-window-setup 'current-window) 
+(setq org-log-done t)
+
+(setq org-agenda-files (list "~/org/agenda.org"))
 
 
 ;; C/C++ IDE
@@ -178,10 +194,19 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    (quote
-    ("d6922c974e8a78378eacb01414183ce32bc8dbf2de78aabcc6ad8172547cb074" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6ee6f99dc6219b65f67e04149c79ea316ca4bcd769a9e904030d38908fd7ccf9" default))))
+    ("d6922c974e8a78378eacb01414183ce32bc8dbf2de78aabcc6ad8172547cb074" "8aebf25556399b58091e533e455dd50a6a9cba958cc4ebb0aab175863c25b9a4" "6ee6f99dc6219b65f67e04149c79ea316ca4bcd769a9e904030d38908fd7ccf9" default)))
+ '(safe-local-variable-values
+   (quote
+    ((company-clang-arguments "-I/usr/include/qt4/" "-I/home/<user>/project_root/include2/")))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+
+
+; Python
+(package-initialize)
+(elpy-enable)
+
